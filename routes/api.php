@@ -1,7 +1,7 @@
 <?php
 
-use App\Http\Controllers\Condomino\CondominoController;
-use App\Http\Controllers\Morador\MoradorController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Auth\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,14 +20,29 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::group(['middleware' => 'auth'], function () {
-    Route::group(['middleware' => 'role:morador', 'prefix' => 'morador', 'as' => 'morador.'], function () {
-        Route::resource('morador', MoradorController::class);
+
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::group(['middleware' => ['auth:sanctum', 'role:morador']], function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+});
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+
+    Route::group(['middleware' => 'role:3,2'], function () {
+        Route::get('/rota-mista', [AdminController::class, 'rotaMista']);
     });
-    Route::group(['middleware' => 'role:condomino', 'prefix' => 'condomino', 'as' => 'condomino.'], function () {
-        Route::resource('condomino', CondominoController::class);
+
+    Route::group(['middleware' => 'role:1'], function () {
+        Route::get('/admin', [AdminController::class, 'admin']);
     });
-    Route::group(['middleware' => 'role:admin', 'prefix' => 'admin', 'as' => 'admin.'], function () {
-        Route::resource('admin', AdminController::class);
+
+    Route::group(['middleware' => 'role:2'], function () {
+        Route::get('/role2', [AdminController::class, 'role2']);
+    });
+
+    Route::group(['middleware' => 'role:3'], function () {
+        Route::get('/role3', [AdminController::class, 'role3']);
     });
 });

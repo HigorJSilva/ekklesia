@@ -15,19 +15,26 @@ class CheckRole
      * @param  string $role
      * @return mixed
      */
-    public function handle(Request $request, Closure $next, string $role)
+    public function handle(Request $request, Closure $next, ...$roles)
     {
-        if ($role == 'admin' && auth()->user()->role_id != 1) {
-            abort(403);
+
+        if (!in_array(auth()->user()->roleId, $roles)) {
+            return response('não autorizado', 403);
         }
 
-        if ($role == 'condomino' && auth()->user()->role_id != 2) {
-            abort(403);
-        }
+        // if ($role == 'admin' && auth()->user()->roleId != 1) {
+        //     return response('não autorizado', 403);
+        // }
 
-        if ($role == 'morador' && auth()->user()->role_id != 3) {
-            abort(403);
-        }
+        // if ($role == 'condomino' && auth()->user()->roleId != 2) {
+        //     return response('não autorizado', 403);
+        // }
+
+        // if ($role == 'morador' && auth()->user()->roleId != 3) {
+        //     return response('não autorizado', 403);
+        // }
+
+
 
         return $next($request);
     }

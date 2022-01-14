@@ -22,15 +22,15 @@ class UserSeeder extends Seeder
             'roleId' => 1,
         ]);
         return User::create([
-            'name' => 'condomino',
+            'name' => 'role1',
             'password' => Hash::make('123'),
-            'email' => 'condomino@gmail.com',
+            'email' => 'role1@gmail.com',
             'roleId' => 2,
         ]);
         return User::create([
-            'name' => 'morador',
+            'name' => 'role2',
             'password' => Hash::make('123'),
-            'email' => 'morador@gmail.com',
+            'email' => 'role2@gmail.com',
             'roleId' => 2,
         ]);
     }

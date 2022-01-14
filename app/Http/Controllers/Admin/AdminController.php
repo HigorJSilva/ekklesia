@@ -82,4 +82,24 @@ class AdminController extends Controller
     {
         //
     }
+
+    public function rotaMista()
+    {
+        return 'rota de autorização multipla acessada';
+    }
+
+    public function admin()
+    {
+        return 'rota administrador acessada';
+    }
+
+    public function role2()
+    {
+        return 'rota papel 2 acessada';
+    }
+
+    public function role3()
+    {
+        return 'rota papel 3 acessada';
+    }
 }
