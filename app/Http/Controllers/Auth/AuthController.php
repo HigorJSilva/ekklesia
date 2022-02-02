@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Helpers\Resposta;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
@@ -43,16 +45,23 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $fields = $request->validate([
+
+        $validator = Validator::make($request->all(), [
             'email' => 'required|string',
             'password' => 'required|string'
         ]);
 
+        if ($validator->fails()) {
+            return response()->json(new Resposta(false, null, null, $validator->erros));
+        }
+
+        $fields = $validator->validated();
+
         $user = User::where('email', $fields['email'])->first();
 
         if (!$user || !Hash::check($fields['password'], $user->password)) {
-            return response([
-                'message' => 'Bad creds'
+            return response()->json([
+                'message' => 'Credenciais inválidas'
             ], 401);
         }
 

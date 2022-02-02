@@ -2,20 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Role;
-use Illuminate\Database\Seeder;
 
-class RoleSeeder extends Seeder
+class RoleSeeder extends BaseSeeder
 {
-    /**
-     * Run the database seeds.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        Role::create(['name' => 'Administrator']);
-        Role::create(['name' => 'Condomino']);
-        Role::create(['name' => 'Morador']);
-    }
+    protected $table = 'roles';
+    protected $data = [
+        ['name' => 'Administrator'],
+        ['name' => 'Condomino'],
+        ['name' => 'Morador']
+    ];
 }
