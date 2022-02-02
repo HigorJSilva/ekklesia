@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests;
+namespace {{ namespace }};
 
-use App\Http\Requests\BaseRequest;
 use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\BaseRequest;
 
-class TesteRequest extends BaseRequest
+class {{ class }} extends BaseRequest
 {
 
     protected $saving;
@@ -27,7 +27,7 @@ class TesteRequest extends BaseRequest
     public function rules()
     {
         return [
-            'nome1' => 'required'
+            //
         ];
     }
 }

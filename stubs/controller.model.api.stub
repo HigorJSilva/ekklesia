@@ -1,0 +1,33 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\BaseController;
+use {{ namespacedRequests }}
+
+class {{ class }} extends BaseController
+{
+      protected $request = {{Request}}::class;
+    /**
+     * Prepara o request com o id do usuário logado.
+     *
+     * @return void
+     */
+    protected function prepareData($data)
+    {
+        $data['userId'] = Auth::user()->id;
+        return $data;
+    }
+
+    /**
+     * Desativar um registro
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function deactivate({{Request}} $request)
+    {
+    return response()->json($this->service->deactivate($request->validated()));
+    }
+}
+
