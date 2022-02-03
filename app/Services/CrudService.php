@@ -244,7 +244,7 @@ abstract class CrudService
      * @param string|int $id
      * @return array
      */
-    public function deactivate($id)
+    public function destroy($id)
     {
         $model = $this->getModel()->findOrFail($id);
         $authorize = $this->authorize('delete', $model);
@@ -256,23 +256,19 @@ abstract class CrudService
         return [];
     }
 
-    /**
-     * @param string|int $id
-     * @return array
-     */
-    public function reactivate($id)
+    public function changeStatus($id)
     {
         $model = $this->getModel()->findOrFail($id);
         $authorize = $this->authorize('restore', $model);
         if (!$authorize->status) {
             return $authorize;
         }
-        return $this->performActivate($model);
+        return $this->performStatusChange($model);
     }
 
-    protected function performActivate($model)
+    protected function performStatusChange($model)
     {
-        $model->update(['status' => 'active']);
+        $model->update(['ativo' => !$model->ativo]);
         return [];
     }
 
@@ -316,7 +312,7 @@ abstract class CrudService
      * @param array $additionalData
      * @return array
      */
-    protected function prepareSave($data, $additionalData)
+    protected function prepareSave(array $data, array $additionalData): array
     {
         $data['empresaId'] = Auth::user()->empresaId ?? null;
         return array_merge($data, $additionalData);
@@ -328,7 +324,7 @@ abstract class CrudService
      * @param array $additionalData
      * @return array
      */
-    protected function postSave($model, $data, $additionalData)
+    protected function postSave(Model $model, array $data, array $additionalData): array
     {
         $pk = $model->getKeyName();
         return [
@@ -342,7 +338,7 @@ abstract class CrudService
      * @param array $additionalData
      * @return array
      */
-    protected function prepareUpdate($model, $data, $additionalData)
+    protected function prepareUpdate(Model $model, array $data, array $additionalData): array
     {
         return array_merge($data, $additionalData);
     }
@@ -362,7 +358,7 @@ abstract class CrudService
      * @param array $additionalData
      * @return array
      */
-    protected function postUpdate($model, $data, $additionalData)
+    protected function postUpdate(Model $model, array $data, array $additionalData): array
     {
         return [];
     }

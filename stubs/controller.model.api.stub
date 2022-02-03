@@ -25,9 +25,9 @@ class {{ class }} extends BaseController
      *
      * @return \Illuminate\Http\Response
      */
-    public function deactivate({{Request}} $request)
+    public function changeStatus(int $id)
     {
-    return response()->json($this->service->deactivate($request->validated()));
+        return response()->json($this->service->changeStatus($id));
     }
 }
 

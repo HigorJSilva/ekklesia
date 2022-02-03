@@ -79,11 +79,11 @@ abstract class JsonCrudController extends Controller
     public function destroy($id)
     {
         try {
-            $this->service->deactivate($id);
+            $this->service->destroy($id);
         } catch (Exception $e) {
             return response()->json(new RespostaException(false, $e->getMessage(), null, null));
         }
-        return response()->json((object) $this->service->deactivate($id));
+        return response()->json((object) $this->service->destroy($id));
     }
 
     /**
@@ -91,9 +91,15 @@ abstract class JsonCrudController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function reactivate($id)
+
+    public function changeStatus(int $id)
     {
-        return response()->json((object) $this->service->reactivate($id));
+        try {
+            $this->service->destroy($id);
+        } catch (Exception $e) {
+            return response()->json(new RespostaException(false, $e->getMessage(), null, null));
+        }
+        return response()->json((object) $this->service->destroy($id));
     }
 
     /**
