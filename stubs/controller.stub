@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace {{ namespace }};
 
-use App\Http\Controllers\Controller;
-use App\Models\User;
+use {{ rootNamespace }}Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class AdminController extends Controller
+class {{ class }} extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +14,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return User::all();
+        //
     }
 
     /**
@@ -82,25 +81,5 @@ class AdminController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function rotaMista()
-    {
-        return 'rota de autorização multipla acessada';
-    }
-
-    public function admin()
-    {
-        return 'rota administrador acessada';
-    }
-
-    public function role2()
-    {
-        return 'rota papel 2 acessada';
-    }
-
-    public function role3()
-    {
-        return 'rota papel 3 acessada';
     }
 }

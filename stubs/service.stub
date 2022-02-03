@@ -1,0 +1,44 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+use Illuminate\Database\Eloquent\Model;
+
+class {{ class }}Service extends CrudService
+{
+    public function getModel($data = [])
+    {
+        return new {{model}}($data);
+    }
+
+    protected function prepareSave(array $data, array $additionalData): array
+    {
+        $finalData = parent::prepareSave($data, $additionalData);
+
+        return $finalData;
+    }
+
+    protected function prepareUpdate(Model $model, array $data, array $additionalData): array
+    {
+        $finalData = parent::prepareUpdate($model, $data, $additionalData);
+
+        return $finalData;
+    }
+
+    protected function postSave(Model $model, array $data, array $additionalData): array
+    {
+        $finalData = parent::postSave($model, $data, $additionalData);
+
+        return $finalData;
+    }
+
+    protected function postUpdate(Model $model, array $data, array $additionalData): array
+    {
+
+        $finalData = parent::postSave($model, $data, $additionalData);
+
+        return $finalData;
+    }
+}
+

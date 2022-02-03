@@ -1,0 +1,30 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Helpers\BaseModel;
+
+class {{ class }} extends BaseModel
+{
+    use HasFactory;
+
+    protected $table = '{{ class }}';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'field1',
+        'field2',
+    ];
+
+    public $guardFromUpdate = [];
+    public $queryFilters = [
+        'or' => [
+             'field1' => 'like',
+             'field2' => '=',
+        ],
+        'and' => [
+             'userId' => '=',
+        ],
+     ];
+
+}
