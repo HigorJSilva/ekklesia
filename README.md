@@ -25,7 +25,7 @@ Duplique o arquivo example.env e faça as alterações no arquivo .env
 
     cp .env.example .env
 
-Creie a chave da aplicação
+Crie a chave da aplicação
 
     php artisan key:generate
 
